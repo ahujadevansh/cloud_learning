@@ -1,0 +1,16 @@
+{
+    "SECRET_KEY": "",
+    "DATABASE_Name": "",
+    "DATABASE_HOST": "",
+    "DATABASE_USER": "",
+    "DATABASE_PASSWORD": "",
+    "DATABASE_PORT": "",
+    "ADMIN_URL": "admin/",
+    "EMAIL_HOST": "",
+    "EMAIL_USERNAME": "",
+    "EMAIL_PASSWORD": "",
+    "EMAIL_PORT": "",
+    "mailtrap": "",
+    "DEBUG": "False",
+    "ALLOWED_HOSTS": "127.0.0.1"
+}
