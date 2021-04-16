@@ -96,11 +96,11 @@ DATABASES = {
 # # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 # AUTH_USER_MODEL = "users.CustomUser"
 # # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-# LOGIN_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "course-home"
 # # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
-# LOGIN_URL = "users:login"
+LOGIN_URL = "users-login"
 # # https://docs.djangoproject.com/en/dev/ref/settings/#logout-redirect-url
-# LOGOUT_REDIRECT_URL = "users:login"
+LOGOUT_REDIRECT_URL = "users-login"
 
 
 # Password validation

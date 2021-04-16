@@ -105,6 +105,7 @@ def _recommendations(subject_list, df, cosine_sim):
     real_sims = []
     sum_of_product = 0
     sum_of_sims = 0
+    rating = 0
     for items in score_series.iteritems():
         if len(recommended_subjects) > 9:
             break
