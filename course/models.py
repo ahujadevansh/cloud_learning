@@ -58,7 +58,7 @@ class Subject(models.Model):
     thumb = models.CharField(max_length=100, blank=True, null=True)
     pic = models.ImageField(default=DEFAULT_PROFILE_IMAGE, upload_to=subject_pic_path)
 
-    pic = models.CharField(max_length=200, blank=True, null=True)
+    # pic = models.CharField(max_length=200, blank=True, null=True)
     description = models.CharField(max_length=1000, blank=True, null=True)
     price = models.PositiveIntegerField(default=0)
     lecturer_id = models.ForeignKey(Lecturer, on_delete=models.DO_NOTHING)
