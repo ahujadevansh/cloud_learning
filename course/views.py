@@ -11,6 +11,9 @@ from django.views.decorators.vary import vary_on_cookie
 
 from users.models import Student
 
+from course.models import Course
+
+
 from .cfService import get_recommmendations_cf
 from .forms import CourseDismissForm, CourseEnrollForm
 from .models import Enrollment, Subject
@@ -18,7 +21,8 @@ from .services import get_enrolled_subjects, get_recommmendations
 
 
 def home(request):
-    context = {'home_page': 'active'}
+    courses = Course.objects.all()
+    context = {'home_page': 'active', 'courses' : courses}
     return render(request, 'index.html', context)
 
 
