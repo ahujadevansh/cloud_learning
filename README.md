@@ -17,3 +17,6 @@ import db, password for all users:happy@123
 db location:drive - CC Project - Link: https://drive.google.com/file/d/1Qr6U5hM3LXlH5o-V7G_CKozZuXqaEdiS/view
 
 python manage.py runserver
+
+sudo service supervisor reload
+sudo service nginx reload
