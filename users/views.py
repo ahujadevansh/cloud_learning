@@ -88,13 +88,14 @@ def teacher_single(request, lecturerId):
 @login_required
 def teacher_rating(request):
     #print(request.POST.get('lecturer'))
-    lecturerId = request.POST.get('lecturer','')
-
+    
     form = LecturerRatingForm(request.POST)
-    current_student = Student.objects.get(account=request.user.id)
-    form.instance.student = current_student
-    form.fields['lecturer'] = lecturerId
-    form.save()
+    lecturerId = request.POST.get('lecturer','')
+    # print(form.instance.__dict__)
+    rating = form.save()
+    current_student = get_object_or_404(Student, account=request.user.pk)
+    rating.student = current_student
+    rating.save()
     messages.success(request, f'Your comment has been created!')
 
     return redirect('teachers-single', lecturerId)
