@@ -1,7 +1,10 @@
+import datetime
+import os
+
 from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils import timezone
-
+from users.models import Lecturer
 
 class Faculty(models.Model):
     name = models.CharField(max_length=80, blank=True, null=True)
@@ -39,12 +42,28 @@ class Category(models.Model):
         return f'Category {self.name}'
 
 class Subject(models.Model):
+
+    DEFAULT_PROFILE_IMAGE = 'nopic.jpg'
+
+    def profile_pic_path(self, filename):
+        if filename != self.DEFAULT_PROFILE_IMAGE:
+            basefilename, file_extension = os.path.splitext(filename)
+            randomstr = datetime.datetime.now().strftime('%d-%m-%Y_%I:%M:%S,%f')
+            return 'subject_pics/{lecturer_id}/{basename}_{randomstring}{ext}'.format(
+                lecturer_id=self.lecturer_id, basename=basefilename, randomstring=randomstr, ext=file_extension)
+        return self.DEFAULT_PROFILE_IMAGE
     
     name = models.CharField(max_length=80, blank=True, null=True)
     category = models.ForeignKey(Category, models.DO_NOTHING, db_column='category', blank=True, null=True)
     thumb = models.CharField(max_length=100, blank=True, null=True)
+    pic = models.ImageField(default=DEFAULT_PROFILE_IMAGE, upload_to=profile_pic_path)
+
     pic = models.CharField(max_length=200, blank=True, null=True)
     description = models.CharField(max_length=1000, blank=True, null=True)
+    price = models.PositiveIntegerField(default=0)
+    lecturer_id = models.ForeignKey(Lecturer, on_delete=models.DO_NOTHING)
+    requirements = models.TextField()
+    duration = models.IntegerField()
 
     class Meta:
         db_table = 'subject'
