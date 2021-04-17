@@ -11,7 +11,7 @@
                 <div class="col-lg-4 col-md-8">
                     <div class="teachers-left mt-50">
                         <div class="hero">
-                            <img src="{% static 'images/teachers/t-1.jpg' %}" alt="Teachers">
+                            <img src="{{lecturer.profile_pic}}" alt="Teachers">
                         </div>
                         <div class="name">
                             <h6>{{ lecturer.account.username }}</h6>
@@ -26,7 +26,7 @@
                             </ul>
                         </div>
                         <div class="description">
-                            <p>Gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate..</p>
+                            <p>{{lecturer.bio}}</p>
                         </div>
                     </div> <!-- teachers left -->
                 </div>
@@ -48,16 +48,13 @@
                                 <div class="dashboard-cont">
                                     <div class="single-dashboard pt-40">
                                         <h5>About</h5>
-                                        <p>Lorem ipsum gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus .</p>
+                                        <p>{{lecturer.about}}</p>
                                     </div> <!-- single dashboard -->
                                     <div class="single-dashboard pt-40">
-                                        <h5>Acchivments</h5>
-                                        <p>Lorem ipsum gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus .</p>
+                                        <h5>Achievments</h5>
+                                        <p>{{lecturer.achievements}}</p>
                                     </div> <!-- single dashboard -->
-                                    <div class="single-dashboard pt-40">
-                                        <h5>My Objective</h5>
-                                        <p>Lorem ipsum gravida nibh vel velit auctor aliquetn sollicitudirem quibibendum auci elit cons equat ipsutis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus .</p>
-                                    </div> <!-- single dashboard -->
+                                     <!-- single dashboard -->
                                 </div> <!-- dashboard cont -->
                             </div>
                             <div class="tab-pane fade" id="courses" role="tabpanel" aria-labelledby="courses-tab">
@@ -70,7 +67,7 @@
                                                         <img src="{% static 'images/course/cu-2.jpg' %}" alt="Course">
                                                     </div>
                                                     <div class="price">
-                                                        <span>$10</span>
+                                                        <span>{{courses.price}}</span>
                                                     </div>
                                                 </div>
                                                 <div class="cont border">
@@ -192,6 +189,11 @@
                                                             <input type="text" placeholder="Last Name">
                                                         </div>
                                                     </div> -->
+                                                    <!-- <div class="col-md-12"  name="id">
+                                                        <div class="form-single">
+                                                            {{rating_form.lecturer}}
+                                                        </div>
+                                                    </div> -->
                                                     <div class="col-md-12">
                                                         <div class="form-single">
                                                             Your Rating: {{ rating_form.rating }}
@@ -202,11 +204,11 @@
                                                             <div class="rate-wrapper">
                                                                 <div class="rate-label">Your Rating:</div>
                                                                 <div class="rate">
-                                                                    <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                                    <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                                    <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                                    <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
-                                                                    <div class="rate-item"><i class="fa fa-star" aria-hidden="true"></i></div>
+                                                                    <div class="rate-item"><i class="fa fa-star" aria-hidden="true">1</i></div>
+                                                                    <div class="rate-item"><i class="fa fa-star" aria-hidden="true">2</i></div>
+                                                                    <div class="rate-item"><i class="fa fa-star" aria-hidden="true">3</i></div>
+                                                                    <div class="rate-item"><i class="fa fa-star" aria-hidden="true">4</i></div>
+                                                                    <div class="rate-item"><i class="fa fa-star" aria-hidden="true">5</i></div>
                                                                 </div>
                                                             </div>
                                                         </div>
