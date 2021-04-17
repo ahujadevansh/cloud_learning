@@ -20,7 +20,7 @@ from .services import get_enrolled_subjects, get_recommmendations
 
 
 def home(request):
-    courses = Course.objects.all()
+    courses = Subject.objects.all()
     lecturers = Lecturer.objects.all()[:2]
     context = {'home_page': 'active', 
         'courses' : courses,

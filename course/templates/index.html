@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load random_numbers %}
 {% block content %}
     <!--====== SLIDER PART START ======-->
     
@@ -200,13 +201,20 @@
                 <!-- to change -->
                 {% for course in courses %}
                 <div class="col-lg-4">
-                    <div class="single-course">
+                    <div class="single-course mt-30">
                         <div class="thum">
                             <div class="image">
-                                <img src="{% static 'images/course/cu-1.jpg' %}" alt="Course">
+                                <!-- <img src="/static/images/course/cu-{{ forloop.counter }}.jpg" alt="Course"> -->
+                                <img class="img-fluid" style="height:225px;" src="{{ course.pic.url }}" alt="Course">
                             </div>
                             <div class="price">
-                                <span>Free</span>
+                                <span>
+                                    {%if not course.price %}
+                                        Free
+                                    {% else %}
+                                    ₹ {{course.price}}
+                                    {% endif %}
+                                </span>
                             </div>
                         </div>
                         <div class="cont">
@@ -217,25 +225,19 @@
                                 <li><i class="fa fa-star"></i></li>
                                 <li><i class="fa fa-star"></i></li>
                             </ul>
-                            <span>(20 Reviews)</span>
-                            <a href="courses-single.html"><h4>
-                                {{ course.name }}
-                            </h4></a>
+                            <span>({% random_int 1000 %} Reviews)</span>
+                            <a href="{% url 'courses-single' course.id %}"><h4>{{ course.name }}</h4></a>
                             <div class="course-teacher">
                                 <div class="thum">
-                                    <a href="#"><img src="{% static 'images/course/teacher/t-1.jpg' %}" alt="teacher"></a>
+                                    <a href="#"><img src="{{ course.lecturer_id.profile_pic.url }}" alt="teacher"></a>
                                 </div>
                                 <div class="name">
-                                    <a href="#">
-                                        <h6>
-                                            {{ course.faculty }}
-                                        </h6>
-                                    </a>
+                                    <a href="#"><h6>{{ course.lecturer_id.account.username }}</h6></a>
                                 </div>
                                 <div class="admin">
                                     <ul>
-                                        <li><a href="#"><i class="fa fa-user"></i><span>31</span></a></li>
-                                        <li><a href="#"><i class="fa fa-heart"></i><span>10</span></a></li>
+                                        <li><a href="#"><i class="fa fa-user"></i><span>{% random_int 100 %}</span></a></li>
+                                        <li><a href="#"><i class="fa fa-heart"></i><span>{% random_int 100 %}</span></a></li>
                                     </ul>
                                 </div>
                             </div>
