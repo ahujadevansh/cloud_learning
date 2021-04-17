@@ -45,7 +45,7 @@ class Subject(models.Model):
 
     DEFAULT_PROFILE_IMAGE = 'nopic.jpg'
 
-    def profile_pic_path(self, filename):
+    def subject_pic_path(self, filename):
         if filename != self.DEFAULT_PROFILE_IMAGE:
             basefilename, file_extension = os.path.splitext(filename)
             randomstr = datetime.datetime.now().strftime('%d-%m-%Y_%I:%M:%S,%f')
@@ -56,7 +56,7 @@ class Subject(models.Model):
     name = models.CharField(max_length=80, blank=True, null=True)
     category = models.ForeignKey(Category, models.DO_NOTHING, db_column='category', blank=True, null=True)
     thumb = models.CharField(max_length=100, blank=True, null=True)
-    pic = models.ImageField(default=DEFAULT_PROFILE_IMAGE, upload_to=profile_pic_path)
+    pic = models.ImageField(default=DEFAULT_PROFILE_IMAGE, upload_to=subject_pic_path)
 
     pic = models.CharField(max_length=200, blank=True, null=True)
     description = models.CharField(max_length=1000, blank=True, null=True)
