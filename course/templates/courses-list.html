@@ -82,7 +82,7 @@
                                 <a href="{% url 'courses-single' course.id %}"><h4>{{ course.name }}</h4></a>
                                 <div class="course-teacher">
                                     <div class="thum">
-                                        <a href="#"><img src="{{ course.lecturer_id.profile_pic.url }}" alt="teacher"></a>
+                                        <a href="{% url 'teachers-single' course.lecturer_id.pk %}"><img src="{{ course.lecturer_id.profile_pic.url }}" alt="teacher"></a>
                                     </div>
                                     <div class="name">
                                         <a href="{% url 'teachers-single' course.lecturer_id.pk %}"><h6>{{ course.lecturer_id.account.username }}</h6></a>
