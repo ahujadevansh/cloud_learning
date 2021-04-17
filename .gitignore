@@ -1,7 +1,8 @@
 ### Project template
 .pytest_cache/
 etc/config.json
-media_cdn*
+media_cdn/*
+!media_cdn/nopic.jpg
 static_cdn
 db/
 *.sqlite3

@@ -4,7 +4,6 @@ import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
-
 # name & email are in auth_user
 class Lecturer(models.Model):
     
@@ -55,11 +54,11 @@ class Student(models.Model):
 
 class LecturerRating(models.Model):
     lecturer = models.ForeignKey(Lecturer, models.DO_NOTHING, db_column='lecturer', blank=True, null=True)
-    student = models.ForeignKey('Student', models.DO_NOTHING, db_column='student', blank=True, null=True)
+    student = models.ForeignKey(Student, models.DO_NOTHING, db_column='student', blank=True, null=True)
     rating = models.IntegerField(blank=True, null=True)
 
     class Meta:
         db_table = 'lecturer_rating'
     
     def __str__(self):
-        return f'{self.lecturer} | {self.lecturer.id} | {self.rating}'
+        return f'{self.lecturer} | {self.rating}'

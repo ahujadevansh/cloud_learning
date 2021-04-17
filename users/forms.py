@@ -16,3 +16,4 @@ class LecturerRatingForm(forms.ModelForm):
     class Meta:
         model = LecturerRating
         fields = ['lecturer', 'student', 'rating']
+        widgets = {'lecturer': forms.HiddenInput()}

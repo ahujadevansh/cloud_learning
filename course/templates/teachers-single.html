@@ -1,7 +1,7 @@
 
 {% extends "base.html" %}
 {% load static %}
-
+{% load random_numbers %}
 {% block content %}
     <!--====== TEACHERS PART START ======-->
     
@@ -11,7 +11,7 @@
                 <div class="col-lg-4 col-md-8">
                     <div class="teachers-left mt-50">
                         <div class="hero">
-                            <img src="{{lecturer.profile_pic}}" alt="Teachers">
+                            <img src="{{lecturer.profile_pic.url}}" alt="Teachers">
                         </div>
                         <div class="name">
                             <h6>{{ lecturer.account.username }}</h6>
@@ -60,80 +60,52 @@
                             <div class="tab-pane fade" id="courses" role="tabpanel" aria-labelledby="courses-tab">
                                 <div class="courses-cont pt-20">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="single-course mt-30">
-                                                <div class="thum">
-                                                    <div class="image">
-                                                        <img src="{% static 'images/course/cu-2.jpg' %}" alt="Course">
-                                                    </div>
-                                                    <div class="price">
-                                                        <span>{{courses.price}}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="cont border">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                    <span>(20 Reviews)</span>
-                                                    <a href="#"><h4>Learn basic javascript from start for beginner</h4></a>
-                                                    <div class="course-teacher">
-                                                        <div class="thum">
-                                                            <a href="#"><img src="{% static 'images/course/teacher/t-2.jpg' %}" alt="teacher"></a>
+                                        {% for course in courses %}
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="single-course mt-30">
+                                                    <div class="thum">
+                                                        <div class="image">
+                                                            <!-- <img src="/static/images/course/cu-{{ forloop.counter }}.jpg" alt="Course"> -->
+                                                            <img class="img-fluid" style="height:225px;" src="{{ course.pic.url }}" alt="Course">
                                                         </div>
-                                                        <div class="name">
-                                                            <a href="#"><h6>Mark anthem</h6></a>
-                                                        </div>
-                                                        <div class="admin">
-                                                            <ul>
-                                                                <li><a href="#"><i class="fa fa-user"></i><span>31</span></a></li>
-                                                                <li><a href="#"><i class="fa fa-heart"></i><span>10</span></a></li>
-                                                            </ul>
+                                                        <div class="price">
+                                                            <span>
+                                                                {%if not course.price %}
+                                                                    Free
+                                                                {% else %}
+                                                                ₹ {{course.price}}
+                                                                {% endif %}
+                                                            </span>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div> <!-- single course -->
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="single-course mt-30">
-                                                <div class="thum">
-                                                    <div class="image">
-                                                        <img src="{% static 'images/course/cu-3.jpg' %}" alt="Course">
-                                                    </div>
-                                                    <div class="price">
-                                                        <span>$30</span>
-                                                    </div>
-                                                </div>
-                                                <div class="cont border">
-                                                    <ul>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                        <li><i class="fa fa-star"></i></li>
-                                                    </ul>
-                                                    <span>(20 Reviews)</span>
-                                                    <a href="#"><h4>Learn basic javascript from start for beginner</h4></a>
-                                                    <div class="course-teacher">
-                                                        <div class="thum">
-                                                            <a href="#"><img src="{% static 'images/course/teacher/t-2.jpg' %}" alt="teacher"></a>
-                                                        </div>
-                                                        <div class="name">
-                                                            <a href="#"><h6>Mark anthem</h6></a>
-                                                        </div>
-                                                        <div class="admin">
-                                                            <ul>
-                                                                <li><a href="#"><i class="fa fa-user"></i><span>31</span></a></li>
-                                                                <li><a href="#"><i class="fa fa-heart"></i><span>10</span></a></li>
-                                                            </ul>
+                                                    <div class="cont">
+                                                        <ul>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                            <li><i class="fa fa-star"></i></li>
+                                                        </ul>
+                                                        <span>({% random_int 1000 %} Reviews)</span>
+                                                        <a href="{% url 'courses-single' course.id %}"><h4>{{ course.name }}</h4></a>
+                                                        <div class="course-teacher">
+                                                            <div class="thum">
+                                                                <a href="#"><img src="{{ course.lecturer_id.profile_pic.url }}" alt="teacher"></a>
+                                                            </div>
+                                                            <div class="name">
+                                                                <a href="{% url 'teachers-single' course.lecturer_id.pk %}"><h6>{{ course.lecturer_id.account.username }}</h6></a>
+                                                            </div>
+                                                            <div class="admin">
+                                                                <ul>
+                                                                    <li><a href="#"><i class="fa fa-user"></i><span>{% random_int 100 %}</span></a></li>
+                                                                    <li><a href="#"><i class="fa fa-heart"></i><span>{% random_int 100 %}</span></a></li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div> <!-- single course -->
-                                        </div>
+                                                </div> <!-- single course -->
+                                            </div>
+                                        {% endfor %}
                                     </div> <!-- row -->
                                 </div> <!-- courses cont -->
                             </div>
@@ -189,11 +161,7 @@
                                                             <input type="text" placeholder="Last Name">
                                                         </div>
                                                     </div> -->
-                                                    <!-- <div class="col-md-12"  name="id">
-                                                        <div class="form-single">
-                                                            {{rating_form.lecturer}}
-                                                        </div>
-                                                    </div> -->
+                                                    <input type="hidden" name="lecturer" id="id_lecturer" value="{{ lecturer.pk}}">
                                                     <div class="col-md-12">
                                                         <div class="form-single">
                                                             Your Rating: {{ rating_form.rating }}

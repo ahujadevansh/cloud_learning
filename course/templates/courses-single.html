@@ -22,11 +22,12 @@
                                 <li>
                                     <div class="teacher-name">
                                         <div class="thum">
-                                            <img src="{% static 'images/course/teacher/t-1.jpg' %}" alt="Teacher">
+                                            <!-- <img src="{% static 'images/course/teacher/t-1.jpg' %}" alt="Teacher"> -->
+                                            <img class="img-fluid" style="height:50px;" src="{{ course.lecturer_id.profile_pic.url }}" alt="Course">
                                         </div>
                                         <div class="name">
                                             <span>Teacher</span>
-                                            <h6>Mark anthem</h6>
+                                            <h6>{{course.lecturer_id.account.username}}</h6>
                                         </div>
                                     </div>
                                 </li>

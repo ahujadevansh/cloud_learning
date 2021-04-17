@@ -13,7 +13,7 @@ from users.models import Student
 
 from .cfService import get_recommmendations_cf
 from .forms import CourseDismissForm, CourseEnrollForm
-from .models import Enrollment, Subject
+from .models import Enrollment, Subject, SubjectRating
 from .services import get_enrolled_subjects, get_recommmendations
 
 

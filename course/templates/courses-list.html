@@ -57,10 +57,17 @@
                         <div class="single-course mt-30">
                             <div class="thum">
                                 <div class="image">
-                                    <img src="/static/images/course/cu-{{ forloop.counter }}.jpg" alt="Course">
+                                    <!-- <img src="/static/images/course/cu-{{ forloop.counter }}.jpg" alt="Course"> -->
+                                    <img class="img-fluid" style="height:225px;" src="{{ course.pic.url }}" alt="Course">
                                 </div>
                                 <div class="price">
-                                    <span>Free</span>
+                                    <span>
+                                        {%if not course.price %}
+                                            Free
+                                        {% else %}
+                                        ₹ {{course.price}}
+                                        {% endif %}
+                                    </span>
                                 </div>
                             </div>
                             <div class="cont">
@@ -75,10 +82,10 @@
                                 <a href="{% url 'courses-single' course.id %}"><h4>{{ course.name }}</h4></a>
                                 <div class="course-teacher">
                                     <div class="thum">
-                                        <a href="#"><img src="{% static  'images/course/teacher/t-1.jpg' %}" alt="teacher"></a>
+                                        <a href="#"><img src="{{ course.lecturer_id.profile_pic.url }}" alt="teacher"></a>
                                     </div>
                                     <div class="name">
-                                        <a href="#"><h6>Mark anthem</h6></a>
+                                        <a href="{% url 'teachers-single' course.lecturer_id.pk %}"><h6>{{ course.lecturer_id.account.username }}</h6></a>
                                     </div>
                                     <div class="admin">
                                         <ul>
