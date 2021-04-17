@@ -33,6 +33,18 @@ class Lecturer(models.Model):
 
 # name, email, last_login are in auth_user
 class Student(models.Model):
+
+    DEFAULT_PROFILE_IMAGE = 'nopic.jpg'
+
+    def profile_pic_path(self, filename):
+        if filename != self.DEFAULT_PROFILE_IMAGE:
+            basefilename, file_extension = os.path.splitext(filename)
+            randomstr = datetime.datetime.now().strftime('%d-%m-%Y_%I:%M:%S,%f')
+            return 'profile_pics/{userid}/{basename}_{randomstring}{ext}'.format(
+                userid=self.id, basename=basefilename, randomstring=randomstr, ext=file_extension)
+        return self.DEFAULT_PROFILE_IMAGE
+
+
     name = models.CharField(max_length=80)
     gender = models.CharField(max_length=80, blank=True, null=True)
     nationality = models.CharField(max_length=80, blank=True, null=True)
@@ -44,7 +56,9 @@ class Student(models.Model):
     # last_login = models.DateTimeField(blank=True, null=True)
     accumulated_online_time = models.DateTimeField(blank=True, null=True)
     dob = models.CharField(max_length=80, blank=True, null=True)
-
+    
+    profile_pic = models.ImageField(default=DEFAULT_PROFILE_IMAGE, upload_to=profile_pic_path)
+    
     class Meta:
         db_table = 'student'
 
@@ -56,7 +70,7 @@ class LecturerRating(models.Model):
     lecturer = models.ForeignKey(Lecturer, models.DO_NOTHING, db_column='lecturer', blank=True, null=True)
     student = models.ForeignKey(Student, models.DO_NOTHING, db_column='student', blank=True, null=True)
     rating = models.IntegerField(blank=True, null=True)
-
+    comment = models.TextField(blank=True, null=True)
     class Meta:
         db_table = 'lecturer_rating'
     

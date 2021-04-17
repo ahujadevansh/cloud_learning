@@ -15,5 +15,5 @@ class UserRegisterForm(UserCreationForm):
 class LecturerRatingForm(forms.ModelForm):
     class Meta:
         model = LecturerRating
-        fields = ['lecturer', 'student', 'rating']
+        fields = ['lecturer', 'student', 'rating', 'comment']
         widgets = {'lecturer': forms.HiddenInput()}
