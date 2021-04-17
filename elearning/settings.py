@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'course.apps.CourseConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+    'storages',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -151,10 +152,24 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 #     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 # ]
 
+#To define bucket connection details
+AWS_STORAGE_BUCKET_NAME = config.get('BUCKET_NAME')
+AWS_S3_REGION_NAME = config.get('AWS_S3_REGION_NAME')
+AWS_ACCESS_KEY_ID = config.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config.get('AWS_SECRET_ACCESS_KEY')
+#Indicates django-storages the domain to use to refer to static files.
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_DEFAULT_ACL = None
+
+MEDIAFILES_LOCATION = 'media_cdn'
+#Storage type
+DEFAULT_FILE_STORAGE = 'elearning.custom_storages.MediaStorage'
 # MEDIA
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
+MEDIA_ROOT = "media_cdn"
+
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = "/media/"
 
