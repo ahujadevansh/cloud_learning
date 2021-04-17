@@ -182,8 +182,10 @@ def course_dismiss(request):
 
 
 def _refresh_session(request):
-    del request.session['recommmend_list']
-    del request.session['recommmend_cf_list']
+    if request.session.get('recommmend_list'):
+        del request.session['recommmend_list']
+    if request.session.get('recommmend_cf_list'):
+        del request.session['recommmend_cf_list']
 
 
 @login_required
