@@ -60,7 +60,7 @@
                     </div>
                     <div class="cont">
                         <a href="{% url 'teachers-single' lecturer.id %}"><h6>{{ lecturer.account.username }}</h6></a>
-                        <span>{{ title_list|index:forloop.counter0 }}</span>
+                        <span>{{ lecturer.designation }}</span>
                     </div>
                 </div> <!-- single teachers -->
             </div>

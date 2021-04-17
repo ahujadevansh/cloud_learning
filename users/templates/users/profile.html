@@ -21,17 +21,18 @@
 </section>
 
 <!--====== PAGE BANNER PART ENDS ======-->
-
-    <h2>{{ user.username }}'s Profile</h2>
-    <div class="border-top pt-3">
-        <ul>
-            <li>username: {{ user.username }}</li>
-            <li>email: {{ user.email }}</li>
-            <li>first name: {{ user.first_name }}</li>
-            <li>last name: {{ user.last_name }}</li>
-        </ul>
-        <small class="text-muted">
-            <a href="{% url 'course-home' %}">Return to Home</a>
-        </small>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">
+                {{ user.first_name }} {{ user.last_name }}
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">
+                {{ user.email }}
+            </h6>
+            <p class="card-text">
+                Username: {{ user.username }}
+            </p>
+            <a href="{% url 'course-home' %}" class="card-link">Return Home</a>
+        </div>
     </div>
 {% endblock content %}

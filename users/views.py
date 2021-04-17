@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import LecturerRatingForm, UserRegisterForm
 from .models import Lecturer, LecturerRating, Student
-
+from course.models import Subject
 
 def register(request):
     if request.method == 'POST':
@@ -58,31 +58,37 @@ def teacher(request):
         'base_url': base_url,
         'filter_str': filter_str
     }
+    print((lecturers[0].id))
     return render(request, 'teachers.html', context)
 
 
 def teacher_single(request, lecturerId):
     title_list = ["Vice Chancellor", "Pro Chancellor", "Aerobics head"]
-    title = title_list[random.randint(0, 2)]
+    
     lecturer = get_object_or_404(Lecturer, pk=lecturerId)
+    title = lecturer.designation
     lecturer_rating_list = list(
         LecturerRating.objects.filter(lecturer=lecturerId))
     print("==============lecturer_rating_list==============")
     print(lecturer_rating_list)
+    courses=list(Subject.objects.filter(lecturer_id=lecturerId))
+    print(courses)
     rating_form = LecturerRatingForm()
     context = {
         'teachers_page': 'active',
         'lecturer': lecturer,
         'title': title,
         'lecturer_rating_list': lecturer_rating_list,
-        'rating_form': rating_form
+        'rating_form': rating_form,
+        'courses':courses
     }
     return render(request, 'teachers-single.html', context)
 
 
 @login_required
 def teacher_rating(request):
-    lecturerId = request.POST.get('lecturer', '')
+    #print(request.POST.get('lecturer'))
+    lecturerId = request.POST.get('lecturer','')
 
     form = LecturerRatingForm(request.POST)
     current_student = Student.objects.get(account=request.user.id)
