@@ -537,50 +537,24 @@
                 <div class="col-lg-6 offset-lg-1">
                     <div class="teachers mt-20">
                         <div class="row">
+                            {% for lecturer in lecturers %}
                             <div class="col-sm-6">
                                 <div class="single-teachers mt-30 text-center">
                                     <div class="image">
-                                        <img src="{% static 'images/teachers/t-1.jpg' %}" alt="Teachers">
+                                        <img src="{{lecturer.profile_pic.url}}" alt="Teachers">
                                     </div>
                                     <div class="cont">
-                                        <a href="teachers-single.html"><h6>Mark Alen</h6></a>
-                                        <span>Vice Chancellor</span>
+                                        <a href="teachers-single.html"><h6>{{lecturer.account.username}}</h6></a>
+                                        <span>{{lecturer.designation}}</span>
                                     </div>
                                 </div> <!-- single teachers -->
                             </div>
-                            <div class="col-sm-6">
-                                <div class="single-teachers mt-30 text-center">
-                                    <div class="image">
-                                        <img src="{% static 'images/teachers/t-2.jpg' %}" alt="Teachers">
-                                    </div>
-                                    <div class="cont">
-                                        <a href="teachers-single.html"><h6>David card</h6></a>
-                                        <span>Pro Chancellor</span>
-                                    </div>
-                                </div> <!-- single teachers -->
+                            {% endfor %}
+                            <div class="teachers-cont">
+                                <a href="{% url 'teachers' %}" class="main-btn mt-135">More Teachers..</a>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="single-teachers mt-30 text-center">
-                                    <div class="image">
-                                        <img src="{% static 'images/teachers/t-3.jpg' %}" alt="Teachers">
-                                    </div>
-                                    <div class="cont">
-                                        <a href="teachers-single.html"><h6>Rebeka Alig</h6></a>
-                                        <span>Pro Chancellor</span>
-                                    </div>
-                                </div> <!-- single teachers -->
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="single-teachers mt-30 text-center">
-                                    <div class="image">
-                                        <img src="{% static 'images/teachers/t-4.jpg' %}" alt="Teachers">
-                                    </div>
-                                    <div class="cont">
-                                        <a href="teachers-single.html"><h6>Hanna Bein</h6></a>
-                                        <span>Aerobics head</span>
-                                    </div>
-                                </div> <!-- single teachers -->
-                            </div>
+                            
+                            
                         </div> <!-- row -->
                     </div> <!-- teachers -->
                 </div>

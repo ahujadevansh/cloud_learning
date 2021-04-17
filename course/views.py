@@ -9,8 +9,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 
-from users.models import Student
-
+from users.models import Student, Lecturer
 from course.models import Course
 
 
@@ -22,7 +21,11 @@ from .services import get_enrolled_subjects, get_recommmendations
 
 def home(request):
     courses = Course.objects.all()
-    context = {'home_page': 'active', 'courses' : courses}
+    lecturers = Lecturer.objects.all()[:2]
+    context = {'home_page': 'active', 
+        'courses' : courses,
+        'lecturers' : lecturers
+        }
     return render(request, 'index.html', context)
 
 
